@@ -1,9 +1,12 @@
-import { StyleSheet, Text, View } from 'react-native'
+import React from 'react'
+import { StyleSheet, Text, View, Button } from 'react-native'
 
 const App = () => {
   return (
     <View style={styles.container}>
       <Text>Open up App.tsx to start working on your app!</Text>
+      <Button onPress={() => { }} title="$15" />
+      <Button onPress={() => { }} title="$30" />
     </View>
   )
 }
