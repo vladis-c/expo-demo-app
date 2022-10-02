@@ -1,14 +1,14 @@
 {
-  "name": "server",
+  "name": "stripe-server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon stripe-server.ts",
+    "start": "nodemon index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Vladislav",
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.1",

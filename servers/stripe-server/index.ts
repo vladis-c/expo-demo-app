@@ -1,10 +1,10 @@
 import express, { Request, Response } from 'express'
-import * as keys from '../config/keys'
+import * as keys from '../../config/keys'
 import Stripe from 'stripe'
 
 const apiKey = typeof keys.secretKey !== 'undefined' ? keys.secretKey : ''
 const stripe = new Stripe(apiKey, { apiVersion: '2022-08-01' })
-Stripe.PaymentIntentsResource
+
 const app = express()
 const PORT = process.env.PORT || 3030
 
