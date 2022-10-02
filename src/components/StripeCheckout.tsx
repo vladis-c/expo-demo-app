@@ -1,24 +1,34 @@
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, View, Button, Alert, } from 'react-native'
 import { useStripe } from '@stripe/stripe-react-native'
+
 import { fetchStripeParams } from '../utils/stripe'
+import { StripeCustomerParamsType } from '../types/types'
 
 const StripeCheckout = () => {
   const { initPaymentSheet, presentPaymentSheet } = useStripe()
   const [paymentSuccess, setPaymentSuccess] = useState<boolean | null>(null)
+  const [customer, setCustomer] = useState<StripeCustomerParamsType>({
+    name: "Bobby",
+    customerId: ""
+  })
 
   const handlePayment = async (price: string) => {
     try {
-      const data = await fetchStripeParams(price, "John")
+      const data = await fetchStripeParams(price, customer)
       await initPaymentSheet({
         customerId: data?.customerId,
-        paymentIntentClientSecret: data?.paymentIntent ? data?.paymentIntent : "",
+        paymentIntentClientSecret: data?.paymentIntent || "",
         merchantDisplayName: "Merchant from Finland",
         defaultBillingDetails: {
           address: {
             country: "FI"
           }
         }
+      })
+      setCustomer({
+        ...customer,
+        customerId: data?.customerId
       })
       openPaymentSheet()
     } catch (error) {
@@ -45,6 +55,7 @@ const StripeCheckout = () => {
     if (paymentSuccess === false) {
       Alert.alert("Error occured")
     }
+    console.log("customer", customer)
     setPaymentSuccess(null)
   }, [paymentSuccess])
 

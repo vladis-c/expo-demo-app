@@ -1,9 +1,16 @@
-import { StripePaymentParamsType } from "../types/types"
+import {
+  StripeCustomerParamsType,
+  StripePaymentParamsType,
+} from '../types/types'
 
-export const fetchStripeParams = async (amount: string, name: string) => {
+export const fetchStripeParams = async (
+  amount: string,
+  customer: StripeCustomerParamsType
+) => {
+  const { name, customerId } = customer
   try {
     const response = await fetch(
-      `http://localhost:3030/checkout?amount=${amount}00&name=${name}`,
+      `http://localhost:3030/checkout?amount=${amount}00&name=${name}&id=${customerId}`,
       {
         method: 'POST',
         headers: {

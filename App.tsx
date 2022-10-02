@@ -5,10 +5,8 @@ import * as keys from "./config/keys"
 import StripeCheckout from './src/components/StripeCheckout'
 
 const App = () => {
-
-
   return (
-    <StripeProvider publishableKey={keys.publishableKey ? keys.publishableKey : ""}>
+    <StripeProvider publishableKey={keys.publishableKey || ""}>
       <StripeCheckout />
     </StripeProvider>
   )
