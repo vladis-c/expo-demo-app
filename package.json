@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "dev": "nodemon server/stripe-server.js",
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
@@ -12,13 +11,10 @@
   "dependencies": {
     "@stripe/stripe-react-native": "0.13.1",
     "expo": "~46.0.13",
-    "express": "^4.18.1",
-    "nodemon": "^2.0.20",
     "react": "18.0.0",
     "react-dom": "18.0.0",
     "react-native": "0.69.6",
-    "react-native-web": "~0.18.7",
-    "stripe": "^10.12.0"
+    "react-native-web": "~0.18.7"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

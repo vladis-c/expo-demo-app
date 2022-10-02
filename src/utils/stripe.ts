@@ -1,3 +1,5 @@
+import { StripePaymentParamsType } from "../types/types"
+
 export const fetchStripeParams = async (amount: string, name: string) => {
   try {
     const response = await fetch(
@@ -9,7 +11,7 @@ export const fetchStripeParams = async (amount: string, name: string) => {
         },
       }
     )
-    const data = await response.json()
+    const data: StripePaymentParamsType = await response.json()
     return data
   } catch (error) {
     console.log('error', error)

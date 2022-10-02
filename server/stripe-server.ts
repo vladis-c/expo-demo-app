@@ -1,18 +1,21 @@
-const express = require('express')
-const keys = require("../config/keys")
-const stripe = require('stripe')(keys.secretKey)
+import express, { Request, Response } from 'express'
+import * as keys from '../config/keys'
+import Stripe from 'stripe'
+
+const apiKey = typeof keys.secretKey !== 'undefined' ? keys.secretKey : ''
+const stripe = new Stripe(apiKey, { apiVersion: '2022-08-01' })
+Stripe.PaymentIntentsResource
 const app = express()
 const PORT = process.env.PORT || 3030
 
-const checkoutPayment = async (req, res) => {
+const checkoutPayment = async (req: Request, res: Response) => {
   res.header('Access-Control-Allow-Origin', '*')
-  const amount = req.query.amount
-  const name = req.query.name
+  const amount = req.query.amount || 0
+  const name = req.query.name?.toString() || ''
   try {
     const customer = await stripe.customers.create({ name })
-
     const paymentIntent = await stripe.paymentIntents.create({
-      amount,
+      amount: +amount,
       currency: 'eur',
       customer: customer.id,
       automatic_payment_methods: {
